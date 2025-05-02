@@ -21,7 +21,7 @@
             border-radius: 25px;
             padding: 15px;
             width: 90%;
-            max-width: 350px; /* Adjusted maximum width for better compactness */
+            max-width: 350px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
         
@@ -64,7 +64,7 @@
         
         .buttons-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px; /* Adjusted gap */
             margin-top: 15px; /* Reduced margin */
         }
@@ -127,18 +127,13 @@
             background: linear-gradient(145deg, #5ce074, #3fc354);
         }
         
-        .timer-display {
-            font-size: 20px; /* Kept smaller for better fit */
-            margin: 5px 0;
-            color: #83f3c2;
+        .footer {
+            text-align: center;
+            margin-top: 15px; /* Space above footer */
+            color: #83f3c2; /* Text color for the footer */
+            font-size: 16px;
         }
-        
-        .energy-info {
-            font-size: 16px; 
-            color: #83f3c2;
-            margin-top: 5px;
-        }
-        
+
         /* Media Queries for responsive adjustments */
         @media (max-width: 480px) {
             .temp {
@@ -154,7 +149,7 @@
             }
             
             .buttons-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .button {
@@ -164,11 +159,6 @@
             
             .icon {
                 font-size: 20px; 
-            }
-            
-            .timer-display,
-            .energy-info {
-                font-size: 14px; 
             }
         }
     </style>
@@ -185,8 +175,6 @@
                 <div class="status-item">ROOM: 27°C</div>
                 <div class="status-item">POWER: 850W</div>
             </div>
-            <div class="timer-display">TIMER: 2:00 HRS</div>
-            <div class="energy-info">ECO MODE ACTIVE</div>
         </div>
 
         <div class="buttons-grid">
@@ -198,35 +186,17 @@
                 <span class="icon">🔄</span>
                 MODE
             </button>
-            <button class="button" onclick="adjustFan()">
-                <span class="icon">💨</span>
-                FAN
-            </button>
             <button class="button temp-btn" onclick="increaseTemp()">
                 <span class="icon">↑</span>
                 TEMP+
-            </button>
-            <button class="button" onclick="toggleSwing()">
-                <span class="icon">↕</span>
-                SWING
             </button>
             <button class="button temp-btn" onclick="decreaseTemp()">
                 <span class="icon">↓</span>
                 TEMP-
             </button>
-            <button class="button" onclick="setTimer()">
-                <span class="icon">⏲</span>
-                TIMER
-            </button>
-            <button class="button" onclick="toggleEco()">
-                <span class="icon">🌱</span>
-                ECO
-            </button>
-            <button class="button" onclick="toggleTurbo()">
-                <span class="icon">🚀</span>
-                TURBO
-            </button>
         </div>
+
+        <div class="footer">by Parham</div>
     </div>
 
     <script>
@@ -237,8 +207,6 @@
         let humidity = 45;
         let roomTemp = 27;
         let power = 850;
-        let timerHours = 2;
-        let isEcoMode = true;
 
         function togglePower() {
             isPowered = !isPowered;
@@ -266,24 +234,10 @@
             }
         }
 
-        function adjustFan() {
-            const speeds = ['AUTO', 'LOW', 'MED', 'HIGH', 'TURBO'];
-            const currentIndex = speeds.indexOf(fanSpeed);
-            fanSpeed = speeds[(currentIndex + 1) % speeds.length];
-            updateDisplay();
-        }
-
-        function toggleEco() {
-            isEcoMode = !isEcoMode;
-            updateDisplay();
-        }
-
         function updateDisplay() {
             const tempDisplay = document.querySelector('.temp');
             const modeDisplay = document.querySelector('.mode');
             const statusItems = document.querySelectorAll('.status-item');
-            const timerDisplay = document.querySelector('.timer-display');
-            const energyInfo = document.querySelector('.energy-info');
 
             if (isPowered) {
                 tempDisplay.textContent = `${temperature}°C`;
@@ -292,8 +246,6 @@
                 statusItems[1].textContent = `HUMIDITY: ${humidity}%`;
                 statusItems[2].textContent = `ROOM: ${roomTemp}°C`;
                 statusItems[3].textContent = `POWER: ${power}W`;
-                timerDisplay.textContent = `TIMER: ${timerHours}:00 HRS`;
-                energyInfo.textContent = isEcoMode ? 'ECO MODE ACTIVE' : 'NORMAL MODE';
             } else {
                 tempDisplay.textContent = '--°C';
                 modeDisplay.textContent = 'STANDBY';
@@ -301,8 +253,6 @@
                 statusItems[1].textContent = 'HUMIDITY: --';
                 statusItems[2].textContent = 'ROOM: --°C';
                 statusItems[3].textContent = 'POWER: 0W';
-                timerDisplay.textContent = 'TIMER: OFF';
-                energyInfo.textContent = 'SYSTEM OFF';
             }
         }
     </script>
