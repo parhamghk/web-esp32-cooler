@@ -241,16 +241,12 @@
                 tempDisplay.textContent = `${temperature}°C`;
                 modeDisplay.textContent = `${currentMode} MODE`;
                 statusItems[0].textContent = `FAN: ${fanSpeed}`;
-                statusItems[1].textContent = `HUMIDITY: ${humidity}%`;
                 statusItems[2].textContent = `ROOM: ${roomTemp}°C`;
-                statusItems[3].textContent = `POWER: ${power}W`;
             } else {
                 tempDisplay.textContent = '--°C';
                 modeDisplay.textContent = 'STANDBY';
                 statusItems[0].textContent = 'FAN: OFF';
-                statusItems[1].textContent = 'HUMIDITY: --';
                 statusItems[2].textContent = 'ROOM: --°C';
-                statusItems[3].textContent = 'POWER: 0W';
             }
         }
     </script>
