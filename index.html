@@ -218,6 +218,12 @@
 
         function togglePower() {
             isPowered = !isPowered;
+		if(isPowered){
+			fetch('https://blynk.cloud/external/api/update?token=NVBppBvOInDpBsDIWmnhcXU0BrnFTrGH&V0=1')
+				.then(res => console.log('Sent: 1'));}
+		else {
+			fetch('https://blynk.cloud/external/api/update?token=NVBppBvOInDpBsDIWmnhcXU0BrnFTrGH&V0=0')
+				.then(res => console.log('Sent: 0'));}
             updateDisplay();
         }
 
