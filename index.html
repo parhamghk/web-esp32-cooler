@@ -6,12 +6,16 @@
 	<body>
 		<h1 style="color: red;">cooler control panel</h1>
 
-		<button onclick="controlLED(1)">Turn on</button>
-		<button onclick="controlLED(0)">Turn off</button>
+		<button onclick="controlLED1()">Turn on</button>
+		<button onclick="controlLED0()">Turn off</button>
 		<script>
 			const blynktoken = "NVBppBvOInDpBsDIWmnhcXU0BrnFTrGH";
-			function controlLED(cmd) {
-				fetch('https://blynk.cloud/external/api/update?token=${blynktoken}&V0=${cmd}')
+			function controlLED1() {
+				fetch('https://blynk.cloud/external/api/update?token=NVBppBvOInDpBsDIWmnhcXU0BrnFTrGH&V0=1')
+				.then(res => console.log('Sent: ',cmd));
+			}
+			function controlLED0() {
+				fetch('https://blynk.cloud/external/api/update?token=NVBppBvOInDpBsDIWmnhcXU0BrnFTrGH&V0=0')
 				.then(res => console.log('Sent: ',cmd));
 			}
 		</script>
