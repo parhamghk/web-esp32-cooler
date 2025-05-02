@@ -6,11 +6,13 @@
 	<body>
 		<h1>cooler control panel</h1>
 
-		<button onclick="sendCommand('on')">Turn on</button>
-		<button onclick="sendCommand('off')">Turn off</button>
+		<button onclick="controlLED(1)">Turn on</button>
+		<button onclick="controlLED(0)">Turn off</button>
 		<script>
-			function sendCommand(cmd) {
-				alert("this will send command: " + cmd);
+			const blynktoken = "NVBppBvOInDpBsDIWmnhcXU0BrnFTrGH";
+			function controlLED(cmd) {
+				fetch('https://blynk.cloud/external/api/update?token=${blynktoken}&v0=${cmd}')
+				.then(res => console.log('Sent: ',cmd));
 			}
 		</script>
 	</body>
