@@ -4,14 +4,14 @@
 		<title>cooler remoot</title>
 	</head>
 	<body>
-		<h1>cooler control panel</h1>
+		<h1 style="color: red;">cooler control panel</h1>
 
 		<button onclick="controlLED(1)">Turn on</button>
 		<button onclick="controlLED(0)">Turn off</button>
 		<script>
 			const blynktoken = "NVBppBvOInDpBsDIWmnhcXU0BrnFTrGH";
 			function controlLED(cmd) {
-				fetch('https://blynk.cloud/external/api/update?token=${blynktoken}&v0=${cmd}')
+				fetch('https://blynk.cloud/external/api/update?token=${blynktoken}&V0=${cmd}')
 				.then(res => console.log('Sent: ',cmd));
 			}
 		</script>
