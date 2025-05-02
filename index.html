@@ -42,14 +42,19 @@
             text-shadow: 0 0 10px rgba(131, 243, 194, 0.5);
         }
 
-        .mode {
-            font-size: 24px;
-            margin: 5px 0;
+        .mode,
+        .fan {
+            font-size: 20px; /* Match the font sizes for consistency */
+            background: rgba(131, 243, 194, 0.1); /* Background similar to fan */
+            border-radius: 8px; /* Rounded corners */
+            padding: 5px; /* Padding for spacing */
+            margin: 5px 0; /* Margin for spacing */
+            display: inline-block; /* Inline-block for proper width */
         }
 
         .status-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(1, 1fr);
             gap: 5px;
             margin: 10px 0;
             font-size: 18px;
@@ -143,24 +148,25 @@
             .temp {
                 font-size: 44px; 
             }
-            
-            .mode {
-                font-size: 20px; 
+
+            .mode,
+            .fan {
+                font-size: 18px; /* Adjust font size for smaller screen */
             }
-            
+
             .status-grid {
                 font-size: 16px; 
             }
-            
+
             .buttons-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
+
             .button {
                 height: 50px; 
                 font-size: 14px; 
             }
-            
+
             .icon {
                 font-size: 20px; 
             }
@@ -174,7 +180,7 @@
             <div class="temp">24°C</div>
             <div class="mode">MODE: DRY</div>
             <div class="status-grid">
-                <div class="status-item">FAN: AUTO</div>
+                <div class="status-item fan">FAN: AUTO</div>
             </div>
         </div>
 
@@ -244,16 +250,16 @@
         function updateDisplay() {
             const tempDisplay = document.querySelector('.temp');
             const modeDisplay = document.querySelector('.mode');
-            const statusItems = document.querySelectorAll('.status-item');
+            const statusItems = document.querySelector('.fan');
 
             if (isPowered) {
                 tempDisplay.textContent = `${temperature}°C`;
                 modeDisplay.textContent = `MODE: ${currentMode}`;
-                statusItems[0].textContent = `FAN: ${fanSpeed}`;
+                statusItems.textContent = `FAN: ${fanSpeed}`;
             } else {
                 tempDisplay.textContent = '--°C';
                 modeDisplay.textContent = 'STANDBY';
-                statusItems[0].textContent = 'FAN: OFF';
+                statusItems.textContent = 'FAN: OFF';
             }
         }
     </script>
