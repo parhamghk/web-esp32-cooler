@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Cooler Remote</title>
     <style>
         body {
@@ -17,30 +19,31 @@
             background: #1e1e1e;
             border-radius: 25px;
             padding: 25px;
-            width: 380px;
+            width: 90%; /* Adjusting width for responsiveness */
+            max-width: 380px; /* Maximum width limit */
             box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
 
         .display {
-            background: #000000;
-            color: #00ff9d;
+            background: #1d1d1d; /* Slightly lighter for contrast */
+            color: #83f3c2; /* Softer green for text */
             padding: 25px;
             margin-bottom: 30px;
             border-radius: 15px;
             font-family: 'Digital', monospace;
             text-align: center;
-            box-shadow: inset 0 0 15px rgba(0,255,157,0.2);
-            border: 1px solid #333;
+            box-shadow: inset 0 0 15px rgba(131, 243, 194, 0.2);
+            border: 1px solid #444;
         }
 
         .temp {
-            font-size: 48px;
+            font-size: 54px; /* Increased for better visibility */
             margin: 15px 0;
-            text-shadow: 0 0 10px rgba(0,255,157,0.5);
+            text-shadow: 0 0 10px rgba(131, 243, 194, 0.5);
         }
 
         .mode {
-            font-size: 24px;
+            font-size: 26px; /* Slightly increased size */
             margin: 10px 0;
         }
 
@@ -49,19 +52,19 @@
             grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin: 15px 0;
-            font-size: 18px;
+            font-size: 20px; /* Increased for better readability */
         }
 
         .status-item {
-            padding: 8px;
-            background: rgba(0,255,157,0.1);
+            padding: 10px; /* Increased padding */
+            background: rgba(131, 243, 194, 0.1);
             border-radius: 8px;
         }
 
         .buttons-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 15px; /* Reduced gap for small screens */
             margin-top: 25px;
         }
 
@@ -73,7 +76,7 @@
             height: 80px;
             cursor: pointer;
             color: #ffffff;
-            font-size: 14px;
+            font-size: 16px; /* Increased for better touch target */
             font-weight: bold;
             transition: all 0.3s ease;
             display: flex;
@@ -95,7 +98,7 @@
         }
 
         .button i {
-            font-size: 24px;
+            font-size: 26px; /* Increased icon size */
             margin-bottom: 5px;
         }
 
@@ -124,19 +127,52 @@
         }
 
         .timer-display {
-            font-size: 20px;
+            font-size: 22px; /* Increased for visibility */
             margin: 10px 0;
-            color: #00ff9d;
+            color: #83f3c2;
         }
 
         .energy-info {
-            font-size: 16px;
-            color: #00ff9d;
+            font-size: 18px; /* Increased size */
+            color: #83f3c2;
             margin-top: 10px;
         }
 
         .icon {
             margin-bottom: 5px;
+        }
+
+        /* Media Queries for responsive adjustments */
+        @media (max-width: 480px) {
+            .temp {
+                font-size: 44px; /* Font size for smaller devices */
+            }
+
+            .mode {
+                font-size: 20px; /* Font size for smaller devices */
+            }
+
+            .status-grid {
+                font-size: 18px; /* Font size for smaller devices */
+            }
+
+            .buttons-grid {
+                grid-template-columns: repeat(3, 1fr); /* Adjust columns for mobile */
+            }
+
+            .button {
+                width: 70px; /* Smaller buttons for mobile */
+                height: 70px;
+                font-size: 14px; /* Font size for buttons on mobile */
+            }
+
+            .icon {
+                font-size: 22px; /* Icon size for smaller devices */
+            }
+
+            .timer-display, .energy-info {
+                font-size: 16px; /* Smaller text for mobile */
+            }
         }
     </style>
 </head>
