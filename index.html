@@ -1,23 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>cooler remoot</title>
-	</head>
-	<body>
-		<h1 style="color: blue;">cooler control panel</h1>
+<html>
+<head>
+    <title>Digital Cooler Remote</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
 
-		<button onclick="controlLED1()">Turn on</button>
-		<button onclick="controlLED0()">Turn off</button>
-		<script>
-			const blynktoken = "NVBppBvOInDpBsDIWmnhcXU0BrnFTrGH";
-			function controlLED1() {
-				fetch('https://blynk.cloud/external/api/update?token=NVBppBvOInDpBsDIWmnhcXU0BrnFTrGH&V0=1')
-				.then(res => console.log('Sent: 1'));
-			}
-			function controlLED0() {
-				fetch('https://blynk.cloud/external/api/update?token=NVBppBvOInDpBsDIWmnhcXU0BrnFTrGH&V0=0')
-				.then(res => console.log('Sent: 0'));
-			}
-		</script>
-	</body>
+        .remote-container {
+            background: #e8e8e8;
+            border-radius: 20px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .display {
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            font-family: 'Digital', monospace;
+            text-align: center;
+        }
+
+        .temp {
+            font-size: 36px;
+            margin: 10px 0;
+        }
+
+        .mode {
+            font-size: 18px;
+        }
+
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .button {
+            background: #ffffff;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .button:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .power-btn {
+            background: #ff3b30;
+            color: white;
+        }
+
+        .mode-btn {
+            background: #007aff;
+            color: white;
+        }
+
+        .temp-btn {
+            background: #4cd964;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="remote-container">
+        <div class="display">
+            <div class="temp">24°C</div>
+            <div class="mode">COOL MODE</div>
+            <div class="fan">FAN: AUTO</div>
+        </div>
+
+        <div class="buttons-grid">
+            <button class="button power-btn" onclick="togglePower()">
+                POWER
+            </button>
+            <button class="button mode-btn" onclick="changeMode()">
+                MODE
+            </button>
+            <button class="button" onclick="adjustFan()">
+                FAN
+            </button>
+            <button class="button temp-btn" onclick="increaseTemp()">
+                TEMP+
+            </button>
+            <button class="button" onclick="toggleSwing()">
+                SWING
+            </button>
+            <button class="button temp-btn" onclick="decreaseTemp()">
+                TEMP-
+            </button>
+            <button class="button" onclick="setTimer()">
+                TIMER
+            </button>
+            <button class="button" onclick="toggleEco()">
+                ECO
+            </button>
+            <button class="button" onclick="toggleTurbo()">
+                TURBO
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let isPowered = false;
+        let temperature = 24;
+        let currentMode = 'COOL';
+        let fanSpeed = 'AUTO';
+
+        function togglePower() {
+            isPowered = !isPowered;
+            updateDisplay();
+        }
+
+        function changeMode() {
+            const modes = ['COOL', 'HEAT', 'DRY', 'FAN'];
+            const currentIndex = modes.indexOf(currentMode);
+            currentMode = modes[(currentIndex + 1) % modes.length];
+            updateDisplay();
+        }
+
+        function increaseTemp() {
+            if (temperature < 30) {
+                temperature++;
+                updateDisplay();
+            }
+        }
+
+        function decreaseTemp() {
+            if (temperature > 16) {
+                temperature--;
+                updateDisplay();
+            }
+        }
+
+        function adjustFan() {
+            const speeds = ['AUTO', 'LOW', 'MED', 'HIGH'];
+            const currentIndex = speeds.indexOf(fanSpeed);
+            fanSpeed = speeds[(currentIndex + 1) % speeds.length];
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            const tempDisplay = document.querySelector('.temp');
+            const modeDisplay = document.querySelector('.mode');
+            const fanDisplay = document.querySelector('.fan');
+
+            if (isPowered) {
+                tempDisplay.textContent = `${temperature}°C`;
+                modeDisplay.textContent = `${currentMode} MODE`;
+                fanDisplay.textContent = `FAN: ${fanSpeed}`;
+            } else {
+                tempDisplay.textContent = '--°C';
+                modeDisplay.textContent = 'OFF';
+                fanDisplay.textContent = 'FAN: OFF';
+            }
+        }
+    </script>
+</body>
 </html>
